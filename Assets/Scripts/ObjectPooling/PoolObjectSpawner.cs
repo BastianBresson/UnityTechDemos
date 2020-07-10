@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CuberSpawnerFromPool : MonoBehaviour
+public class PoolObjectSpawner : MonoBehaviour
 {
     public GameObject spawnBox;
     public float spawnFrequency;
