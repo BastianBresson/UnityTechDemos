@@ -38,7 +38,9 @@ public class PoolObjectSpawner : MonoBehaviour
             Vector3 forceDirection = new Vector3(x, y, z);
 
             float force = Random.Range(50f, 80f);
-            pooledItem.GetComponent<Rigidbody>().AddForce(forceDirection * force);
+            Rigidbody poolObjectRb = pooledItem.GetComponent<Rigidbody>();
+            poolObjectRb.velocity = Vector3.zero;
+            poolObjectRb.AddForce(forceDirection * force);
         }
     }
 

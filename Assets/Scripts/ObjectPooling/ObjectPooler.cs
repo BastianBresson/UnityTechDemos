@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace ObjectPooling
 {
@@ -33,10 +34,25 @@ namespace ObjectPooling
         Dictionary<string, bool> isPoolExpandable = new Dictionary<string, bool>();
         Dictionary<string, GameObject> poolsPrefap = new Dictionary<string, GameObject>();
 
+        public bool UseRandomStartSearch;
+
+        delegate GameObject PoolSearchMethod(string poolTag);
+
+        PoolSearchMethod poolSearcher;
+
         // Start is called before the first frame update
         void Start()
         {
             InitialisePools();
+
+            if (UseRandomStartSearch)
+            {
+                poolSearcher = RandomStartSearch;
+            }
+            else
+            {
+                poolSearcher = LinearSearch;
+            }
         }
 
         private void InitialisePools()
@@ -65,21 +81,18 @@ namespace ObjectPooling
                 return null;
             }
 
-            for (int i = 0; i < pools[poolTag].Count; i++)
-            {
-                if (!pools[poolTag][i].activeInHierarchy)
-                {
-                    GameObject poolItem = pools[poolTag][i];
-                    poolItem.SetActive(true);
-                    poolItem.transform.position = position;
-                    poolItem.transform.rotation = rotation;
-                    return pools[poolTag][i];
-                }
-            }
+            GameObject poolItem = poolSearcher(poolTag);
 
-            if (isPoolExpandable[poolTag])
+            if (poolItem != null)
             {
-                GameObject poolItem = Instantiate(poolsPrefap[poolTag], position, rotation);
+                poolItem.SetActive(true);
+                poolItem.transform.position = position;
+                poolItem.transform.rotation = rotation;
+                return poolItem;
+            }
+            else if (isPoolExpandable[poolTag])
+            {
+                poolItem = Instantiate(poolsPrefap[poolTag], position, rotation);
                 pools[poolTag].Add(poolItem);
                 return poolItem;
             }
@@ -87,6 +100,40 @@ namespace ObjectPooling
             {
                 return null;
             }
+        }
+
+        private GameObject LinearSearch(string poolTag)
+        {
+            for (int i = 0; i < pools[poolTag].Count; i++)
+            {
+                if (!pools[poolTag][i].activeInHierarchy)
+                {
+                    return pools[poolTag][i];
+                }
+            }
+
+            return null;
+        }
+
+        private GameObject RandomStartSearch(string poolTag)
+        {
+            int poolSize = pools[poolTag].Count;
+            int randomOffset = Random.Range(0, poolSize);
+
+            for (int i = 0; i < pools[poolTag].Count; i++)
+            {
+                if (randomOffset + i >= poolSize)
+                {
+                    randomOffset = 0;
+                }
+
+                if (!pools[poolTag][i+randomOffset].activeInHierarchy)
+                {
+                    return pools[poolTag][i + randomOffset];
+                }
+            }
+
+            return null;
         }
     }
 }
