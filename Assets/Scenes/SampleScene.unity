@@ -226,8 +226,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 29370203}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -39.6, y: 0, z: -160.6}
-  m_LocalScale: {x: 120, y: 320, z: 120}
+  m_LocalPosition: {x: -39.6, y: 0, z: -210}
+  m_LocalScale: {x: 240, y: 320, z: 240}
   m_Children: []
   m_Father: {fileID: 781665880}
   m_RootOrder: 1
@@ -277,8 +277,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 193190514}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -39.6, y: 0, z: -160.6}
-  m_LocalScale: {x: 120, y: 320, z: 120}
+  m_LocalPosition: {x: -39.6, y: 0, z: -210}
+  m_LocalScale: {x: 240, y: 320, z: 240}
   m_Children: []
   m_Father: {fileID: 431539931}
   m_RootOrder: 1
@@ -422,18 +422,18 @@ MonoBehaviour:
   - Tag: RedCubePool
     PoolPrefab: {fileID: 2718584788370074293, guid: 14cbd8ca291354044ab68b892137c4dc,
       type: 3}
-    PoolSize: 1500
-    ExpandPool: 1
+    PoolSize: 2000
+    ExpandPool: 0
   - Tag: GreenCubePool
     PoolPrefab: {fileID: 1713263637072590400, guid: c2bfc2798b2db654ea36bbf5d406af94,
       type: 3}
-    PoolSize: 1500
-    ExpandPool: 1
+    PoolSize: 2000
+    ExpandPool: 0
   - Tag: BlueCubePool
     PoolPrefab: {fileID: 2135867998678158946, guid: 8b0378d9e2679814f9706d9a9e71342f,
       type: 3}
-    PoolSize: 1500
-    ExpandPool: 1
+    PoolSize: 2000
+    ExpandPool: 0
   UseRandomStartSearch: 1
 --- !u!1 &431539930
 GameObject:
@@ -557,8 +557,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 593461037}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 25.1, y: 0, z: -113.8}
-  m_LocalScale: {x: 120, y: 320, z: 120}
+  m_LocalPosition: {x: 75, y: 0, z: -113.8}
+  m_LocalScale: {x: 240, y: 320, z: 240}
   m_Children: []
   m_Father: {fileID: 781665880}
   m_RootOrder: 0
@@ -656,8 +656,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 896600042}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 25.1, y: 0, z: -113.8}
-  m_LocalScale: {x: 120, y: 320, z: 120}
+  m_LocalPosition: {x: 75, y: 0, z: -113.8}
+  m_LocalScale: {x: 240, y: 320, z: 240}
   m_Children: []
   m_Father: {fileID: 431539931}
   m_RootOrder: 0
@@ -873,8 +873,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1064461952}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -53, y: 0, z: -91.9}
-  m_LocalScale: {x: 120, y: 320, z: 120}
+  m_LocalPosition: {x: -100, y: 0, z: -40}
+  m_LocalScale: {x: 240, y: 320, z: 240}
   m_Children: []
   m_Father: {fileID: 781665880}
   m_RootOrder: 2
@@ -929,7 +929,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   focalPoint: {fileID: 1007298027}
-  circlingSpeed: 2
+  circlingSpeed: 3
 --- !u!1 &2100912977
 GameObject:
   m_ObjectHideFlags: 0
@@ -959,8 +959,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2100912977}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -53, y: 0, z: -91.9}
-  m_LocalScale: {x: 120, y: 320, z: 120}
+  m_LocalPosition: {x: -100, y: 0, z: -40}
+  m_LocalScale: {x: 240, y: 320, z: 240}
   m_Children: []
   m_Father: {fileID: 431539931}
   m_RootOrder: 2
@@ -1162,7 +1162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81681e8b0802d6545b7204a5e3a0a195, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalTurnTime: 60
+  totalTurnTime: 100
   startRotationEuler: {x: 40, y: 130, z: 90}
   endRotationEuler: {x: -5, y: 130, z: 90}
 --- !u!1001 &6197924538327518178
@@ -1264,7 +1264,7 @@ PrefabInstance:
     - target: {fileID: 6233304655229518940, guid: 340ef93a7508e674f83069f5d20e3a20,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -200
+      value: -280
       objectReference: {fileID: 0}
     - target: {fileID: 6233304655229518940, guid: 340ef93a7508e674f83069f5d20e3a20,
         type: 3}
