@@ -29,8 +29,12 @@ public class ObjectSpawner : MonoBehaviour
 
             Vector3 spawnPosition = RandomPointInBox(spawnBox.transform.position, spawnBox.transform.localScale);
 
+            Instantiate(objectToSpawnPrefab, spawnPosition, Quaternion.identity);
+
+            /*
             GameObject spawnedItem = Instantiate(objectToSpawnPrefab, spawnPosition, Quaternion.identity);
 
+            
             float x = Random.Range(-1f, 1f);
             float y = Random.Range(-1f, 1f);
             float z = Random.Range(-1f, 1f);
@@ -38,6 +42,7 @@ public class ObjectSpawner : MonoBehaviour
 
             float force = Random.Range(50f, 80f);
             spawnedItem.GetComponent<Rigidbody>().AddForce(forceDirection * force);
+            */
         }
     }
 

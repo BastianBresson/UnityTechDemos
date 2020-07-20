@@ -28,8 +28,12 @@ public class PoolObjectSpawner : MonoBehaviour
 
             Vector3 spawnPosition = RandomPointInBox(spawnBox.transform.position, spawnBox.transform.localScale);
 
+            ObjectPooler.Instance.InstantiatePooledItem(poolTag, spawnPosition, Quaternion.identity);
+
+            /*
             GameObject pooledItem = ObjectPooler.Instance.InstantiatePooledItem(poolTag, spawnPosition, Quaternion.identity);
 
+            
             if (pooledItem == null) continue;
 
             float x = Random.Range(-1f, 1f);
@@ -41,6 +45,7 @@ public class PoolObjectSpawner : MonoBehaviour
             Rigidbody poolObjectRb = pooledItem.GetComponent<Rigidbody>();
             poolObjectRb.velocity = Vector3.zero;
             poolObjectRb.AddForce(forceDirection * force);
+            */
         }
     }
 
