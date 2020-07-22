@@ -1,25 +1,26 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ObjectSpawner : MonoBehaviour
 {
-    public GameObject spawnBox;
-    public GameObject objectToSpawnPrefab;
-    public float spawnFrequency;
+    [SerializeField] private GameObject spawnBox = default;
+    [SerializeField] private GameObject objectToSpawnPrefab = default;
+    [SerializeField] private float spawnFrequency = default;
 
-    // Start is called before the first frame update
-    void Start()
+
+    private void Start()
     {
         StartCoroutine(SpawnRoutine());
     }
 
 
-    IEnumerator SpawnRoutine()
+    private IEnumerator SpawnRoutine()
     {
         if (spawnFrequency <= 0)
         {
-            Debug.LogWarning("Spawn frequency needs to be > 0");
+            Debug.LogWarning("Spawn frequency cannot be less than 0");
+
+            // Exit coroutine
             yield break;
         }
 
@@ -30,21 +31,9 @@ public class ObjectSpawner : MonoBehaviour
             Vector3 spawnPosition = RandomPointInBox(spawnBox.transform.position, spawnBox.transform.localScale);
 
             Instantiate(objectToSpawnPrefab, spawnPosition, Quaternion.identity);
-
-            /*
-            GameObject spawnedItem = Instantiate(objectToSpawnPrefab, spawnPosition, Quaternion.identity);
-
-            
-            float x = Random.Range(-1f, 1f);
-            float y = Random.Range(-1f, 1f);
-            float z = Random.Range(-1f, 1f);
-            Vector3 forceDirection = new Vector3(x, y, z);
-
-            float force = Random.Range(50f, 80f);
-            spawnedItem.GetComponent<Rigidbody>().AddForce(forceDirection * force);
-            */
         }
     }
+
 
     private Vector3 RandomPointInBox(Vector3 center, Vector3 size)
     {
@@ -55,6 +44,7 @@ public class ObjectSpawner : MonoBehaviour
            (Random.value - 0.5f) * size.z
         );
     }
+
 
     private void OnTriggerExit(Collider other)
     {

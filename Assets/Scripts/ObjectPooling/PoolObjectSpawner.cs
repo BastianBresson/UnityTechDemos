@@ -1,20 +1,20 @@
 ﻿using ObjectPooling;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PoolObjectSpawner : MonoBehaviour
 {
-    public GameObject spawnBox;
-    public float spawnFrequency;
-    public string poolTag;
+    [SerializeField] private GameObject spawnBox = default;
+    [SerializeField] private float spawnFrequency = default;
+    [SerializeField] private string poolTag = default;
+
 
     private void Start()
     {
         StartCoroutine(SpawnRoutine());
     }
 
-    IEnumerator SpawnRoutine()
+    private IEnumerator SpawnRoutine()
     {
         if (spawnFrequency <= 0)
         {
@@ -29,23 +29,6 @@ public class PoolObjectSpawner : MonoBehaviour
             Vector3 spawnPosition = RandomPointInBox(spawnBox.transform.position, spawnBox.transform.localScale);
 
             ObjectPooler.Instance.InstantiatePooledItem(poolTag, spawnPosition, Quaternion.identity);
-
-            /*
-            GameObject pooledItem = ObjectPooler.Instance.InstantiatePooledItem(poolTag, spawnPosition, Quaternion.identity);
-
-            
-            if (pooledItem == null) continue;
-
-            float x = Random.Range(-1f, 1f);
-            float y = Random.Range(-1f, 1f);
-            float z = Random.Range(-1f, 1f);
-            Vector3 forceDirection = new Vector3(x, y, z);
-
-            float force = Random.Range(50f, 80f);
-            Rigidbody poolObjectRb = pooledItem.GetComponent<Rigidbody>();
-            poolObjectRb.velocity = Vector3.zero;
-            poolObjectRb.AddForce(forceDirection * force);
-            */
         }
     }
 
@@ -60,8 +43,10 @@ public class PoolObjectSpawner : MonoBehaviour
         );
     }
 
+
     private void OnTriggerExit(Collider other)
     {
+        // Gameobject is reused by object pooler
         other.gameObject.SetActive(false);
     }
 }

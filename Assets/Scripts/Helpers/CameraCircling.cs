@@ -1,14 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CameraCircling : MonoBehaviour
 {
-    public GameObject focalPoint;
-    public float circlingSpeed;
+    [SerializeField] private GameObject focalPoint = default;
+    [SerializeField] private float circlingSpeed = default;
 
-    // Update is called once per frame
-    void Update()
+
+    private void Update()
     {
         transform.RotateAround(focalPoint.transform.position, Vector3.up, circlingSpeed * Time.deltaTime);
     }
