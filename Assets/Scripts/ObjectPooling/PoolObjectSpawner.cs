@@ -18,7 +18,9 @@ public class PoolObjectSpawner : MonoBehaviour
     {
         if (spawnFrequency <= 0)
         {
-            Debug.LogWarning("Spawn frequency needs to be > 0");
+            Debug.LogWarning("Spawn frequency cannot be less than 0");
+
+            // Exit coroutine
             yield break;
         }
 
