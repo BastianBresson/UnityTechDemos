@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2718584788370074292}
   - component: {fileID: 9106016062678301174}
+  - component: {fileID: 760973955796149461}
   m_Layer: 0
   m_Name: BuildingCube
   m_TagString: Untagged
@@ -45,6 +46,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2, y: 2, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &760973955796149461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2718584788370074293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e82294a47a8c4dc438e7a15d1c783ee3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  appearTime: 1
 --- !u!1001 &2718584788425639017
 PrefabInstance:
   m_ObjectHideFlags: 0
