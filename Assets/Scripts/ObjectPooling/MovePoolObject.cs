@@ -1,27 +1,51 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class MovePoolObject : MonoBehaviour
 {
-    public float speedMin;
-    public float speedMax;
+    [SerializeField] private float speedMin = default;
+    [SerializeField] private float speedMax = default;
 
-    Vector3 direction;
-    float speed;
+    private Vector3 direction;
+    private float speed;
        
+
     private void OnEnable()
     {
-        direction = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f));
+        SetRandomDirection();
+        SetRandomSpeed();
+    }
+
+
+    private void SetRandomDirection()
+    {
+        direction = new Vector3
+            (
+                Random.Range(-1f, 1f),
+                Random.Range(-1f, 1f),
+                Random.Range(-1f, 1f)
+            );
+
+        // Object must move to eventually leave spawner
         if (direction == Vector3.zero)
         {
             direction.y = 1;
         }
+    }
+
+
+    private void SetRandomSpeed()
+    {
         speed = Random.Range(speedMin, speedMax);
     }
 
-    // Update is called once per frame
-    void Update()
+
+    private void Update()
+    {
+        Move();
+    }
+
+
+    private void Move()
     {
         transform.Translate(direction * speed);
     }
