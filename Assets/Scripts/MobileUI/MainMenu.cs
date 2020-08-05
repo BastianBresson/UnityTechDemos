@@ -18,9 +18,13 @@ public class MainMenu : MonoBehaviour
 
     [SerializeField] private float mainMenuAppearTime = default;
 
+    Vector3 UIStartScale;
+
     private void Start()
     {
         StartSequence();
+
+        UIStartScale = mainMenuUI.transform.localScale;
     }
 
     private void StartSequence()
@@ -64,9 +68,15 @@ public class MainMenu : MonoBehaviour
         LeanTween.scale(go, startScale, scaleTime).setEase(LeanTweenType.easeOutSine).setDelay(delayTime);
     }
 
+    private void MakeUIElementDisappear(GameObject go, float scaleTime, float delayTime)
+    {
+        LeanTween.scale(go, new Vector3(1f, 0f, 1f), scaleTime).setEase(LeanTweenType.easeOutSine).setDelay(delayTime);
+    }
+
     private void MakeUIAppear()
     {
         mainMenuUI.SetActive(true);
+        mainMenuUI.transform.localScale = UIStartScale;
 
         MakeBackgroundAppear();
         MakeStartButtonsAppear();
@@ -94,6 +104,22 @@ public class MainMenu : MonoBehaviour
     }
 
     private void MakeUIDisappear()
+    {
+        foreach (GameObject element in startMenuButtons)
+        {
+            MakeUIElementDisappear(element, mainMenuAppearTime, 0);
+        }
+
+        backgroundOutline.SetActive(false);
+
+        MakeUIElementDisappear(background, mainMenuAppearTime, mainMenuAppearTime);
+
+        Invoke(nameof(DisableUI), 2*mainMenuAppearTime + 0.5f * mainMenuAppearTime);
+    }
+
+
+
+    private void DisableUI()
     {
         mainMenuUI.SetActive(false);
     }
