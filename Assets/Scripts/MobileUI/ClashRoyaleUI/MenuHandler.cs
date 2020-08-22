@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI.Extensions;
+using UnityEngine.UI;
 
 public class MenuHandler : MonoBehaviour
 {
@@ -34,7 +35,6 @@ public class MenuHandler : MonoBehaviour
     public void OnPageChanged(int pageNumber)
     {
         if (!isInitialised) return;
-        Debug.Log($"Page {pageNumber} is now the active page");
         currentPage = pageNumber;
         TweenButtons();
 
@@ -50,41 +50,58 @@ public class MenuHandler : MonoBehaviour
     {
         for (int i = 0; i < menuButtons.Count; i++)
         {
-            RectTransform rect = menuButtons[i].GetComponent<RectTransform>();
+            LayoutElement element = menuButtons[i].GetComponent<LayoutElement>();
 
             if (i == currentPage)
             {
-                TweenBig(rect);
+                StartCoroutine(MakeBigger(element));
             }
             else
             {
-                TweenSmall(rect);
+                StartCoroutine(MakeSmaller(element));
             }
         }
     }
 
-    private void TweenBig(RectTransform rect)
+
+    IEnumerator MakeBigger(LayoutElement element)
     {
-        Vector2 size = rect.rect.size;
+        float elapsedTime = 0f;
 
-        size.x = normaltWidth + 100;
+        while (elapsedTime < 0.2f)
+        {
+            float width = Mathf.Lerp(element.preferredWidth, normaltWidth + 100, elapsedTime / 0.2f);
 
-        LeanTween.size(rect, size, 0.2f).setEaseInOutSine();
+            element.preferredWidth = width;
+
+            elapsedTime += Time.deltaTime;
+
+            yield return null;
+        }
     }
 
-    private void TweenSmall(RectTransform rect)
+    IEnumerator MakeSmaller(LayoutElement element)
     {
-        Vector2 size = rect.rect.size;
+        float elapsedTime = 0f;
 
-        size.x = normaltWidth - 50;
-        LeanTween.size(rect, size, 0.2f).setEaseInOutSine();
+        while (elapsedTime < 0.2f)
+        {
+            float width = Mathf.Lerp(element.preferredWidth, normaltWidth - 50, elapsedTime / 0.2f);
+
+            element.preferredWidth = width;
+
+            elapsedTime += Time.deltaTime;
+
+            yield return null;
+        }
     }
+
 
     private IEnumerator InitilizeButtons()
     {
         yield return new WaitForEndOfFrame();
 
-        normaltWidth = menuButtons[0].GetComponent<RectTransform>().rect.size.x;
+        normaltWidth = menuButtons[0].GetComponent<LayoutElement>().preferredWidth;
 
         currentPage = pageScroller.CurrentPage;
 
